@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        form {
+            max-width: 500px; /* Ancho máximo para el formulario */
+            margin: 0 auto; /* Centrar el formulario en la página */
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block; /* Cada label en su propia línea */
+            margin-top: 15px; /* Espacio superior para separar las etiquetas */
+            margin-bottom: 5px; /* Espacio inferior entre label e input */
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 22px); /* Ancho casi completo con espacio para padding/border */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box; /* Importante para que el padding no desborde el ancho */
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+        }
+
+        button[type="submit"] {
+            display: block; /* Botón en su propia línea */
+            width: 100%; /* Botón ocupa todo el ancho del formulario */
+            padding: 10px 15px;
+            margin-top: 25px; /* Espacio superior para separar del último input */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- views/addSuperhero.ejs -->
+
+<h1>Agregar Nuevo Superhéroe </h1>
+
+<form action="/api/heroes/agregar" method="POST">
+  <!-- Nombre del Superhéroe -->
+  <label for="nombreSuperheroe">Nombre del Superhéroe:</label>
+  <input
+    type="text"
+    name="nombreSuperheroe"
+    id="nombreSuperheroe"
+    required
+    minlength="3"
+    maxlength="60"
+    pattern=".*\S.*"
+    title="Debe tener entre 3 y 60 caracteres y no puede estar vacío"
+  >
+
+  <!-- Nombre Real -->
+  <label for="nombreReal">Nombre Real:</label>
+  <input
+    type="text"
+    name="nombreReal"
+    id="nombreReal"
+    required
+    minlength="3"
+    maxlength="60"
+    pattern=".*\S.*"
+    title="Debe tener entre 3 y 60 caracteres y no puede estar vacío"
+  >
+
+  <!-- Edad -->
+  <label for="edad">Edad:</label>
+  <input
+    type="number"
+    name="edad"
+    id="edad"
+    required
+    min="0"
+    title="La edad debe ser mayor o igual a 0"
+  >
+
+  <!-- Planeta de Origen -->
+  <label for="planetaOrigen">Planeta de Origen:</label>
+  <input
+    type="text"
+    name="planetaOrigen"
+    id="planetaOrigen"
+    required
+    pattern=".*\S.*"
+    title="Este campo no puede estar vacío"
+  >
+
+  <!-- Debilidad -->
+  <label for="debilidad">Debilidad:</label>
+  <input
+    type="text"
+    name="debilidad"
+    id="debilidad"
+    pattern=".*\S.*"
+    title="Este campo no puede estar vacío"
+  >
+
+  <!-- Poderes (como texto separados por comas) -->
+  <label for="poder">Poderes (separados por comas):</label>
+  <input
+    type="text"
+    name="poder"
+    id="poder"
+    placeholder="Ej: Fuerza, Volar"
+    required
+    pattern=".{3,60}(,\s*.{3,60})*"
+    title="Debe ingresar uno o más poderes separados por comas, cada uno entre 3 y 60 caracteres"
+  >
+  <label for="aliado">Aliados (separados por comas):</label>
+  <input
+    type="text"
+    name="aliado"
+    id="aliado"
+    placeholder="Ej: Batman, Superman"
+    title="Ingrese aliados separados por comas"
+  >
+
+  <label for="enemigo">Enemigos (separados por comas):</label>
+  <input
+    type="text"
+    name="enemigo"
+    id="enemigo"
+    placeholder="Ej: Joker, Lex Luthor"
+    title="Ingrese enemigos separados por comas"
+  >
+  <button type="submit">Agregar Superhéroe</button>
+</form>
+</body>
+</html>

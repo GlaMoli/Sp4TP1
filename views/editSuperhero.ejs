@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Superhéroe</title> 
+    <link rel="stylesheet" href="../public/editsuperherostyles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        form {
+            max-width: 500px; /* Ancho máximo para el formulario */
+            margin: 0 auto; /* Centrar el formulario en la página */
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block; /* Cada label en su propia línea */
+            margin-top: 15px; /* Espacio superior para separar las etiquetas */
+            margin-bottom: 5px; /* Espacio inferior entre label e input */
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 22px); /* Ancho casi completo con espacio para padding/border */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box; /* Importante para que el padding no desborde el ancho */
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+        }
+
+        button[type="submit"] {
+            display: block; /* Botón en su propia línea */
+            width: 100%; /* Botón ocupa todo el ancho del formulario */
+            padding: 10px 15px;
+            margin-top: 25px; /* Espacio superior para separar del último input */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Superhéroe </h1>
+
+        <form action="/api/heroes/<%= superheroe._id %>/editar?_method=PUT" method="POST">
+            
+        <label for="nombreSuperheroe">Nombre del Superhéroe:</label>
+        <input type="text" name="nombreSuperheroe" id="nombreSuperheroe"
+            value="<%= superheroe.nombreSuperheroe || '' %>" required minlength="3" maxlength="60" pattern=".*\S.*"
+            title="Debe tener entre 3 y 60 caracteres y no puede estar vacío">
+
+        <label for="nombreReal">Nombre Real:</label>
+        <input type="text" name="nombreReal" id="nombreReal"
+            value="<%= superheroe.nombreReal || '' %>" required minlength="3" maxlength="60" pattern=".*\S.*"
+            title="Debe tener entre 3 y 60 caracteres y no puede estar vacío">
+
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" id="edad"
+            value="<%= superheroe.edad || 0 %>" required min="0"
+            title="Edad válida mayor o igual a 0">
+
+        <label for="planetaOrigen">Planeta de Origen:</label>
+        <input type="text" name="planetaOrigen" id="planetaOrigen"
+            value="<%= superheroe.planetaOrigen || '' %>" required 
+            title="Este campo no puede estar vacío">
+
+        <label for="debilidad">Debilidad:</label>
+        <input type="text" name="debilidad" id="debilidad"
+            value="<%= superheroe.debilidad || '' %>" 
+            title="Este campo no puede estar vacío">
+
+        <label for="poder">Poderes (separados por comas):</label>
+        <input type="text" name="poder" id="poder"
+            value="<%= superheroe.poder && Array.isArray(superheroe.poder) ? superheroe.poder.join(', ') : '' %>" required
+            pattern=".{3,60}(,\\s*.{3,60})*"
+            title="Cada poder entre 3 y 60 caracteres, separados por comas">
+
+        <label for="aliado">Aliados (separados por comas):</label>
+        <input type="text" name="aliado" id="aliado"
+            value="<%= superheroe.aliado && Array.isArray(superheroe.aliado) ? superheroe.aliado.join(', ') : '' %>"
+            title="Aliados separados por comas">
+
+        <label for="enemigo">Enemigos (separados por comas):</label>
+        <input type="text" name="enemigo" id="enemigo"
+            value="<%= superheroe.enemigo && Array.isArray(superheroe.enemigo) ? superheroe.enemigo.join(', ') : '' %>"
+            title="Enemigos separados por comas">
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+</body>
+</html>

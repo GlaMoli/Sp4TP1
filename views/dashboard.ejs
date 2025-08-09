@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/tu_codigo.js" crossorigin="anonymous"></script>
+        <title>Dashboard de Superhéroes</title>
+        <link rel="stylesheet" href="/styles.css">
+        <Style>
+
+        </Style>
+    </head>
+    <body>
+
+        <nav class="navbar">
+        <a href="/dashboard"><i class="fas fa-home"></i></a>
+        <a href="/api/add"><i class="fas fa-plus"></i></a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+        </nav>
+
+        <div class="container">
+            <h1>Lista de Superhéroes</h1>
+
+            <div class="agregar-container">
+                <a href="/api/add">
+                <button>Agregar nuevo superhéroe</button>
+                </a>
+            </div>
+
+            <% if (superheroes && superheroes.length > 0) { %>
+                <ul class="hero-list">
+                    <% superheroes.forEach(function(hero) { %>
+                        <li class="hero-item">
+                            <p><strong>Nombre del Superhéroe:</strong> <%= hero.nombreSuperheroe %></p>
+                            <p><strong>Nombre Real:</strong> <%= hero.nombreReal %></p>
+                            <p><strong>Edad:</strong> <%= hero.edad %></p>
+                            <p><strong>Planeta de Origen:</strong> <%= hero.planetaOrigen %></p>
+                            <p><strong>Poderes:</strong> <%= hero.poder.join(', ') %></p>
+                            <p><strong>Aliados:</strong> <%= hero.aliado.join(', ') %></p>
+                            <p><strong>Enemigos:</strong> <%= hero.enemigo.join(', ') %></p>
+                            <% if (hero.debilidad) { %>
+                            <p><strong>Debilidad:</strong> <%= hero.debilidad %></p>
+                            <% } %>
+
+                            <div class="botones">
+                            <a href="/api/edit/<%= hero._id %>">
+                                <button class="editar">Editar</button>
+                            </a>
+
+                            <form action="/api/heroes/<%= hero._id %>?_method=DELETE" method="POST"
+                            onsubmit="return confirm('¿Estás seguro de que quieres eliminar a <%= hero.nombreSuperheroe %>?');">
+                            <button type="submit">Eliminar</button>
+                            </form>
+                            </div>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                        <p class="no-heroes">No hay superhéroes registrados aún.</p>
+                    <% } %>
+        </div>
+    </body>
+</html>
+
+
+
