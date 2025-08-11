@@ -1,17 +1,15 @@
 {
-  "name": "src",
+  "name": "dashboard-superheroes",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.ejs",
+  "description": "Proyecto con Node.js, Express, EJS y MongoDB",
+  "main": "app.mjs",
   "scripts": {
-    "start": "node app.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
-  "type": "commonjs",
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0",
